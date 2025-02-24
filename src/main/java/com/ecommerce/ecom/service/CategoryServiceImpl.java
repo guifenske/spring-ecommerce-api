@@ -91,8 +91,8 @@ public class CategoryServiceImpl implements CategoryService{
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "Name", categoryDTO.getCategoryName()));
 
-        Category newCategory = new Category(category.getCategoryId(), categoryDTO.getCategoryName());
-        Category savedCategory = categoryRepository.save(newCategory);
+        category.setCategoryName(categoryDTO.getCategoryName());
+        Category savedCategory = categoryRepository.save(category);
 
         return categoryMapper.toCategoryDTO(savedCategory);
     }
